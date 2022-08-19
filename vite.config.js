@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-18 16:00:07
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-19 13:50:23
+ * @LastEditTime: 2022-08-19 18:09:43
  * @Description:
  */
 import { defineConfig } from "vite";
@@ -17,6 +17,11 @@ export default defineConfig({
         scss: {
             additionalData: `@import "@/style/var.scss";`,
         },
+    },
+    server: {
+        hmr: {
+            overlay: false
+        }
     },
     resolve: {
         preserveSymlinks: false,

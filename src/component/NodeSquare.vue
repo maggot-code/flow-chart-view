@@ -3,20 +3,18 @@
  * @Author: maggot-code
  * @Date: 2022-08-19 13:34:23
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-19 15:54:19
+ * @LastEditTime: 2022-08-19 17:57:53
  * @Description: 
 -->
 <script setup>
 import { inject } from "vue";
 const getNode = inject("getNode");
-console.log(getNode());
+const { id } = getNode();
 </script>
 
 <template>
     <div class="node node-square">
-        <h1>square</h1>
-
-        <div class="node-body">node body</div>
+        <h1>square - {{ id }}</h1>
     </div>
 </template>
 

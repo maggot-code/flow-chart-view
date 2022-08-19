@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-18 16:00:20
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-19 16:44:00
+ * @LastEditTime: 2022-08-19 18:10:12
  * @Description: 
 -->
 <script setup>
@@ -11,6 +11,10 @@ import { onMounted, onUnmounted, unref, ref } from "vue";
 import { useTeleport } from "@antv/x6-vue-shape";
 import { Graph } from "@antv/x6";
 import NodeSquare from "@/component/NodeSquare.vue";
+import V1TestJson from "/public/json/v1.test.json";
+import { } from "@/composable/Tree";
+
+console.log(V1TestJson);
 
 let graph;
 const containerRefs = ref(null);
@@ -52,7 +56,7 @@ onMounted(() => {
         component: 'node-square',
         view: UNIQ_GRAPH_ID,
         x: 400,
-        y: 150,
+        y: 100,
         width: 200,
         height: 100,
         data: {},
@@ -63,8 +67,8 @@ onMounted(() => {
         shape: 'vue-shape',
         component: 'node-square',
         view: UNIQ_GRAPH_ID,
-        x: 400,
-        y: 350,
+        x: 200,
+        y: 300,
         width: 200,
         height: 100,
         data: {},
@@ -75,8 +79,20 @@ onMounted(() => {
         shape: 'vue-shape',
         component: 'node-square',
         view: UNIQ_GRAPH_ID,
+        x: 600,
+        y: 300,
+        width: 200,
+        height: 100,
+        data: {},
+    });
+
+    const node4 = graph.addNode({
+        id: "4",
+        shape: 'vue-shape',
+        component: 'node-square',
+        view: UNIQ_GRAPH_ID,
         x: 400,
-        y: 650,
+        y: 500,
         width: 200,
         height: 100,
         data: {},
@@ -88,8 +104,18 @@ onMounted(() => {
     });
 
     graph.addEdge({
-        source: node2,
+        source: node1,
         target: node3,
+    });
+
+    graph.addEdge({
+        source: node2,
+        target: node4,
+    });
+
+    graph.addEdge({
+        source: node3,
+        target: node4,
     });
 });
 
