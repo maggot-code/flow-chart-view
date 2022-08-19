@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-18 16:00:07
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-19 09:51:48
+ * @LastEditTime: 2022-08-19 13:50:23
  * @Description:
  */
 import { defineConfig } from "vite";
@@ -20,9 +20,20 @@ export default defineConfig({
     },
     resolve: {
         preserveSymlinks: false,
-        alias: {
-            "@": "/src"
-        },
+        alias: [
+            {
+                find: "@",
+                replacement: '/src',
+            },
+            {
+                find: '@antv/x6',
+                replacement: '@antv/x6/lib',
+            },
+            {
+                find: '@antv/x6-vue-shape',
+                replacement: '@antv/x6-vue-shape/lib',
+            },
+        ],
         dedupe: ['vue'],
     },
     json: {

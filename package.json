@@ -13,13 +13,15 @@
         "lint:eslint": "eslint --fix . --ext .js,.vue src"
     },
     "dependencies": {
-        "@jsplumb/browser-ui": "^5.11.1",
+        "@antv/x6": "^1.33.1",
+        "@antv/x6-vue-shape": "^1.4.2",
         "lodash-es": "^4.17.21",
         "normalize.css": "^8.0.1",
         "uuid": "^8.3.2",
         "vue": "^3.2.37"
     },
     "devDependencies": {
+        "@types/lodash-es": "^4.17.6",
         "@vitejs/plugin-vue": "^3.0.3",
         "@vitest/ui": "^0.22.1",
         "eslint": "^8.22.0",
