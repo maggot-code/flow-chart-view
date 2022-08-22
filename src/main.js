@@ -3,15 +3,15 @@
  * @Author: maggot-code
  * @Date: 2022-08-18 16:00:20
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-22 15:29:33
+ * @LastEditTime: 2022-08-22 17:28:26
  * @Description:
  */
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 import { isArray, flattenDeep } from "lodash";
+import { createGraphVueNode } from "@/component/FlowChart";
 import App from "@/App.vue";
 
-import '@antv/x6-vue-shape';
 import 'normalize.css';
 import "@/style/index.scss";
 
@@ -27,9 +27,12 @@ const router = createRouter({
     routes: flattenDeep(routes.map(({ value }) => value))
 });
 
+const graphVueNode = createGraphVueNode();
+
 async function main() {
     const app = createApp(App);
 
+    app.use(graphVueNode);
     app.use(router);
 
     await router.isReady();
