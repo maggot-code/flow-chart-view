@@ -3,21 +3,26 @@
  * @Author: maggot-code
  * @Date: 2022-08-22 14:59:48
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-22 15:20:55
+ * @LastEditTime: 2022-08-22 16:26:48
  * @Description: 
 -->
 <script setup>
 import { onMounted } from "vue";
 import { defineFlowChart } from "@/biz/FlowChart";
+import TestJson from "@/assets/json/v1.test.json";
 
 const {
     TeleportView,
     containerRefs,
-    view
+    graphData,
+    setupGraphData,
+    setupNode
 } = defineFlowChart();
 
 onMounted(() => {
-    console.log(view.value);
+    setupGraphData([TestJson]);
+    console.log(graphData.value);
+    setupNode();
 });
 </script>
 
