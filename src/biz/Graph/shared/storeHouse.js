@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 14:04:24
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-23 14:44:54
+ * @LastEditTime: 2022-08-23 15:21:18
  * @Description: 
  */
 import "@antv/x6-vue-shape";

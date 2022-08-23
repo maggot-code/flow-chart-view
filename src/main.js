@@ -8,9 +8,7 @@
  */
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
-import { storeHouse } from "@/biz/Graph";
 import routes from "@/router";
-import houseNodes from "@/biz/GraphNode";
 import App from "@/App.vue";
 
 import 'normalize.css';
@@ -20,15 +18,11 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes
 });
-const house = storeHouse({
-    nodes: houseNodes
-});
 
 async function main() {
     const app = createApp(App);
 
     app.use(router);
-    app.use(house);
 
     await router.isReady();
     app.mount("#app");
