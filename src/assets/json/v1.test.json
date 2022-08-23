@@ -2,35 +2,30 @@
     "id": 1001,
     "name": "发起",
     "state": "finish",
-    "condition": [],
     "children": [
         {
             "id": 1002,
             "pid": 1001,
             "name": "二级企业待审核",
             "state": "pending",
-            "condition": [],
             "children": [
                 {
                     "id": 1003,
                     "pid": 1002,
                     "name": "待处长指定审核",
                     "state": "refuse",
-                    "condition": [],
                     "children": [
                         {
                             "id": 1004,
                             "pid": 1003,
                             "name": "待指定人员审核",
                             "state": "unknown",
-                            "condition": [],
                             "children": [
                                 {
                                     "id": 1005,
                                     "pid": 1004,
                                     "name": "待处长审核",
                                     "state": "unknown",
-                                    "condition": [],
                                     "children": []
                                 }
                             ]

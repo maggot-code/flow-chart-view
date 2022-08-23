@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-18 16:00:20
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-23 14:47:01
+ * @LastEditTime: 2022-08-23 15:59:00
  * @Description:
  */
 import { createApp } from "vue";
@@ -13,6 +13,7 @@ import App from "@/App.vue";
 
 import 'normalize.css';
 import "@/style/index.scss";
+import "@/component/Graphics/Nodes";
 
 const router = createRouter({
     history: createWebHashHistory(),
