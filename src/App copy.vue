@@ -1,9 +1,9 @@
 <!--
- * @FilePath: \flow-chart-view\src\App.vue
+ * @FilePath: \flow-chart-view\src\App copy.vue
  * @Author: maggot-code
  * @Date: 2022-08-18 16:00:20
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-22 10:06:46
+ * @LastEditTime: 2022-08-24 16:07:05
  * @Description: 
 -->
 <script setup>

@@ -13,6 +13,8 @@
                                     "component": "ExamineNode",
                                     "data": {
                                         "state": "unknown",
+                                        "click": true,
+                                        "mouse": false,
                                         "info": []
                                     },
                                     "children": [
@@ -20,7 +22,11 @@
                                             "name": "结束",
                                             "pid": "NA2123_reply",
                                             "id": "endnode",
-                                            "component": "EndNode"
+                                            "component": "EndNode",
+                                            "data": {
+                                                "click": false,
+                                                "mouse": false
+                                            }
                                         }
                                     ]
                                 }
@@ -31,6 +37,8 @@
                             "component": "ExamineNode",
                             "data": {
                                 "state": "unknown",
+                                "click": true,
+                                "mouse": false,
                                 "info": []
                             }
                         }
@@ -41,6 +49,8 @@
                     "component": "ExamineNode",
                     "data": {
                         "state": "pending",
+                        "click": true,
+                        "mouse": false,
                         "info": []
                     }
                 }
@@ -51,6 +61,8 @@
             "component": "ExamineNode",
             "data": {
                 "state": "finish",
+                "click": true,
+                "mouse": false,
                 "info": []
             }
         }
@@ -59,6 +71,8 @@
     "id": "starnode",
     "component": "StartNode",
     "data": {
-        "state": "finish"
+        "state": "finish",
+        "click": true,
+        "mouse": false
     }
 }

@@ -1,0 +1,17 @@
+.node {
+    &-finish {
+        background-color: #67C23A;
+    }
+
+    &-pending {
+        background-color: #E6A23C;
+    }
+
+    &-refuse {
+        background-color: #F56C6C
+    }
+
+    &-unknown {
+        background-color: #909399;
+    }
+}
