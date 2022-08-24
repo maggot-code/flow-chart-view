@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 09:14:43
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-24 18:02:34
+ * @LastEditTime: 2022-08-24 18:05:04
  * @Description: 
 -->
 <script setup>
@@ -12,7 +12,7 @@ import TestJson from "@/assets/json/v2.test.json";
 import insertCss from 'insert-css';
 import GraphContainer from '@/component/Graphics/GraphContainer.vue';
 import { useLayout } from "@/composable/Graphics/useLayout";
-import { findIndex } from "lodash";
+import { findIndex, isNil } from "lodash";
 import { onMounted, unref, ref, computed } from "vue";
 
 const { nodes, edges, toTransform } = useLayout();
@@ -46,22 +46,24 @@ function handlerGraph({ refs, graph, view }) {
         const fromIndex = findIndex(graphNodes, (node) => node.id === from);
         return to.map((id) => {
             const targetIndex = findIndex(graphNodes, (node) => node.id === id);
-            // const { data } = graphNodes[targetIndex];
+            const { data } = graphNodes[targetIndex];
 
             const toLast = index === source.length - 1;
-            // const toReach = isNil(data.state) || data.state === "unknown";
+            const toReach = isNil(data.state) || data.state === "unknown";
 
             const targetMarker = toLast ? "circle" : "block";
+            const strokeDasharray = toReach ? 0 : 6;
+            const stroke = toReach ? "#ddd" : "#666";
             return graph.addEdge({
                 source: graphNodes[fromIndex],
                 target: graphNodes[targetIndex],
                 attrs: {
                     line: {
-                        stroke: "#666",
-                        strokeDasharray: 5,
                         style: {
                             animation: 'ant-line 30s infinite linear'
                         },
+                        stroke,
+                        strokeDasharray,
                         targetMarker
                     }
                 }
