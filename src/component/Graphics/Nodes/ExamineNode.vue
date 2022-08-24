@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 16:00:25
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-24 15:28:35
+ * @LastEditTime: 2022-08-24 16:23:00
  * @Description: 
 -->
 <script setup >
@@ -23,8 +23,5 @@ const { className } = useState(state);
 
 <style scoped lang='scss'>
 @import "./node.scss";
-
-.node-examine {
-    color: #fff;
-}
+@import "./state.scss";
 </style>
