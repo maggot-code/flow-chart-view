@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-18 16:00:07
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-19 18:09:43
+ * @LastEditTime: 2022-08-24 14:17:34
  * @Description:
  */
 import { defineConfig } from "vite";
@@ -21,6 +21,13 @@ export default defineConfig({
     server: {
         hmr: {
             overlay: false
+        },
+        proxy: {
+            '/api': {
+                target: 'http://10.1.1.96:30100/',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, '/api')
+            },
         }
     },
     resolve: {

@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 16:00:25
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-23 16:54:16
+ * @LastEditTime: 2022-08-24 14:32:00
  * @Description: 
 -->
 <script setup >
@@ -20,7 +20,7 @@ const className = {
 </script>
 
 <template>
-    <div class="node node-examine" :class="className[state]">
+    <div class="node node-examine" :class="className[state] ?? 'node-examine-unknown'">
         <p>{{ name }}</p>
     </div>
 </template>

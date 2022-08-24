@@ -1,0 +1,64 @@
+{
+    "children": [
+        {
+            "children": [
+                {
+                    "children": [
+                        {
+                            "children": [
+                                {
+                                    "name": "待处长审核",
+                                    "pid": "_g3p5kq9K",
+                                    "id": "NA2123_reply",
+                                    "component": "ExamineNode",
+                                    "data": {
+                                        "state": "unknown",
+                                        "info": []
+                                    },
+                                    "children": [
+                                        {
+                                            "name": "结束",
+                                            "pid": "NA2123_reply",
+                                            "id": "endnode",
+                                            "component": "EndNode"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "name": "待指定人员审核",
+                            "pid": "M7ic6sdtM_forward",
+                            "id": "_g3p5kq9K",
+                            "component": "ExamineNode",
+                            "data": {
+                                "state": "unknown",
+                                "info": []
+                            }
+                        }
+                    ],
+                    "name": "待处长指定审核",
+                    "pid": "1jpwN64r6",
+                    "id": "M7ic6sdtM_forward",
+                    "component": "ExamineNode",
+                    "data": {
+                        "state": "pending",
+                        "info": []
+                    }
+                }
+            ],
+            "name": "二级企业待审核",
+            "pid": "startnode",
+            "id": "1jpwN64r6",
+            "component": "ExamineNode",
+            "data": {
+                "state": "finish",
+                "info": []
+            }
+        }
+    ],
+    "name": "发起",
+    "id": "starnode",
+    "component": "StartNode",
+    "data": {
+        "state": "finish"
+    }
+}
