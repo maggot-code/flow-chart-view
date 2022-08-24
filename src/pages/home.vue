@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 09:14:43
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-24 16:17:13
+ * @LastEditTime: 2022-08-24 16:35:47
  * @Description: 
 -->
 <script setup>
@@ -11,7 +11,7 @@
 import TestJson from "@/assets/json/v2.test.json";
 import GraphContainer from '@/component/Graphics/GraphContainer.vue';
 import { useLayout } from "@/composable/Graphics/useLayout";
-import { findIndex } from "lodash";
+import { findIndex, isNil } from "lodash";
 import { onMounted, unref, ref, computed } from "vue";
 
 const { nodes, edges, toTransform } = useLayout();
@@ -36,7 +36,7 @@ function handlerGraph({ refs, graph, view }) {
             width: nodeW,
             height: nodeH,
             x: nodeX,
-            y: level * offset
+            y: (level + 0.2) * offset
         });
     });
 
@@ -45,18 +45,22 @@ function handlerGraph({ refs, graph, view }) {
         const fromIndex = findIndex(graphNodes, (node) => node.id === from);
         return to.map((id) => {
             const targetIndex = findIndex(graphNodes, (node) => node.id === id);
-            const config = {
+            // const { data } = graphNodes[targetIndex];
+
+            const toLast = index === source.length - 1;
+            // const toReach = isNil(data.state) || data.state === "unknown";
+
+            const targetMarker = toLast ? "circle" : "block";
+            return graph.addEdge({
                 source: graphNodes[fromIndex],
                 target: graphNodes[targetIndex],
-            };
-            if (index === source.length - 1) {
-                config.attrs = {
+                attrs: {
                     line: {
-                        targetMarker: "circle",
-                    },
+                        stroke: "#666",
+                        targetMarker
+                    }
                 }
-            }
-            return graph.addEdge(config);
+            });
         });
     });
 }
