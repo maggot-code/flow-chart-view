@@ -3,12 +3,13 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 09:14:43
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-24 17:01:21
+ * @LastEditTime: 2022-08-24 18:02:34
  * @Description: 
 -->
 <script setup>
 // import TestJson from "@/assets/json/v1.test.json";
 import TestJson from "@/assets/json/v2.test.json";
+import insertCss from 'insert-css';
 import GraphContainer from '@/component/Graphics/GraphContainer.vue';
 import { useLayout } from "@/composable/Graphics/useLayout";
 import { findIndex } from "lodash";
@@ -57,6 +58,10 @@ function handlerGraph({ refs, graph, view }) {
                 attrs: {
                     line: {
                         stroke: "#666",
+                        strokeDasharray: 5,
+                        style: {
+                            animation: 'ant-line 30s infinite linear'
+                        },
                         targetMarker
                     }
                 }
@@ -75,6 +80,13 @@ function handlerNodeMouse(target) {
 }
 
 onMounted(() => {
+    insertCss(`
+        @keyframes ant-line {
+            to {
+                stroke-dashoffset: -1000
+            }
+        }
+    `)
     toTransform(TestJson);
     loading.value = false;
 });
