@@ -7,16 +7,6 @@
                         {
                             "children": [
                                 {
-                                    "name": "待处长审核",
-                                    "pid": "_g3p5kq9K",
-                                    "id": "NA2123_reply",
-                                    "component": "ExamineNode",
-                                    "data": {
-                                        "state": "unknown",
-                                        "click": true,
-                                        "mouse": false,
-                                        "info": []
-                                    },
                                     "children": [
                                         {
                                             "name": "结束",
@@ -28,7 +18,24 @@
                                                 "mouse": false
                                             }
                                         }
-                                    ]
+                                    ],
+                                    "name": "待处长审核",
+                                    "pid": "_g3p5kq9K",
+                                    "id": "NA2123_reply",
+                                    "component": "ExamineNode",
+                                    "data": {
+                                        "state": "unknown",
+                                        "click": true,
+                                        "mouse": false,
+                                        "info": [
+                                            {
+                                                "name": "贺鸿福"
+                                            },
+                                            {
+                                                "name": "田欣悦"
+                                            }
+                                        ]
+                                    }
                                 }
                             ],
                             "name": "待指定人员审核",
@@ -36,10 +43,16 @@
                             "id": "_g3p5kq9K",
                             "component": "ExamineNode",
                             "data": {
-                                "state": "unknown",
+                                "state": "refuse",
                                 "click": true,
                                 "mouse": false,
-                                "info": []
+                                "info": [
+                                    {
+                                        "name": "周嘉容",
+                                        "date": "2022年8月24日17:52:08",
+                                        "remarks": "不行不行不行"
+                                    }
+                                ]
                             }
                         }
                     ],
@@ -51,7 +64,12 @@
                         "state": "pending",
                         "click": true,
                         "mouse": false,
-                        "info": []
+                        "info": [
+                            {
+                                "name": "汪永逸",
+                                "date": "2022年8月24日17:08:57"
+                            }
+                        ]
                     }
                 }
             ],
@@ -63,16 +81,27 @@
                 "state": "finish",
                 "click": true,
                 "mouse": false,
-                "info": []
+                "info": [
+                    {
+                        "name": "张睿慈",
+                        "date": "2022年8月24日17:04:55"
+                    }
+                ]
             }
         }
     ],
     "name": "发起",
     "id": "starnode",
-    "component": "StartNode",
+    "component": "ExamineNode",
     "data": {
         "state": "finish",
         "click": true,
-        "mouse": false
+        "mouse": false,
+        "info": [
+            {
+                "name": "罗文翰",
+                "date": "2022年8月24日17:04:55"
+            }
+        ]
     }
 }

@@ -3,19 +3,27 @@
  * @Author: maggot-code
  * @Date: 2022-08-24 15:16:19
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-24 15:28:00
+ * @LastEditTime: 2022-08-24 17:42:58
  * @Description: 
  */
 const finishState = {
+    toReach: true,
+    toRemarks: false,
     className: "node-finish"
 };
 const pendingState = {
+    toReach: true,
+    toRemarks: false,
     className: "node-pending"
 };
 const refuseState = {
+    toReach: true,
+    toRemarks: true,
     className: "node-refuse"
 };
 const unknownState = {
+    toReach: false,
+    toRemarks: false,
     className: "node-unknown"
 };
 

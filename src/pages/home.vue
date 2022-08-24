@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 09:14:43
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-24 16:35:47
+ * @LastEditTime: 2022-08-24 17:01:21
  * @Description: 
 -->
 <script setup>
@@ -11,7 +11,7 @@
 import TestJson from "@/assets/json/v2.test.json";
 import GraphContainer from '@/component/Graphics/GraphContainer.vue';
 import { useLayout } from "@/composable/Graphics/useLayout";
-import { findIndex, isNil } from "lodash";
+import { findIndex } from "lodash";
 import { onMounted, unref, ref, computed } from "vue";
 
 const { nodes, edges, toTransform } = useLayout();
