@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 16:00:25
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-25 14:22:06
+ * @LastEditTime: 2022-08-25 14:35:07
  * @Description: 
 -->
 <script setup >
@@ -54,7 +54,7 @@ const infoStyle = computed(() => {
     position: relative;
     align-items: center;
     padding: 8px;
-    border-radius: 3px;
+    border-radius: 6px;
     box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, .04),
         0px 8px 20px rgba(0, 0, 0, .08);
     cursor: pointer;
@@ -85,6 +85,7 @@ const infoStyle = computed(() => {
         background-color: #eee;
         padding: 6px;
         box-sizing: border-box;
+        border-radius: 3px;
         box-shadow: 0px 16px 48px 16px rgba(0, 0, 0, .08),
             0px 12px 32px rgba(0, 0, 0, .12),
             0px 8px 16px -8px rgba(0, 0, 0, .16);
