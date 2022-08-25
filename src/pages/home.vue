@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 09:14:43
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-25 13:19:54
+ * @LastEditTime: 2022-08-25 13:32:31
  * @Description: 
 -->
 <script setup>
@@ -21,11 +21,15 @@ const visabled = computed(() => !unref(loading));
 
 function handlerGraph({ refs, graph, view }) {
     const { clientWidth, clientHeight } = refs;
+    // 根据容器高度得到每个节点可以占用的高度值是多少
     const nodeCut = (clientHeight / unref(nodes).length);
     const nodeW = 200;
     const nodeH = 60;
+    // 将节点定位在容器中心位置
     const nodeX = (clientWidth / 2) - (nodeW / 2);
+    // 如果每个节点占用高度值比默认高度小那么就不能在继续缩小高度了
     const offset = (nodeCut - 20) <= nodeH ? nodeH + 20 : nodeCut;
+
     const graphNodes = unref(nodes).map((node) => {
         const { nodeKey: id, name, level, component, data } = node;
         return graph.addNode({
@@ -43,8 +47,10 @@ function handlerGraph({ refs, graph, view }) {
 
     unref(edges).map((edge, index, source) => {
         const { from, to } = edge;
+        // 在图形节点中找到开始节点实例的索引
         const fromIndex = findIndex(graphNodes, (node) => node.id === from);
         return to.map((id) => {
+            // 在图形节点中找到结束节点实例的索引
             const targetIndex = findIndex(graphNodes, (node) => node.id === id);
             const { data } = graphNodes[targetIndex];
 
@@ -54,6 +60,7 @@ function handlerGraph({ refs, graph, view }) {
             const targetMarker = toLast ? "circle" : "block";
             const strokeDasharray = toReach ? 0 : 6;
             const stroke = toReach ? "#ddd" : "#666";
+
             return graph.addEdge({
                 source: graphNodes[fromIndex],
                 target: graphNodes[targetIndex],
