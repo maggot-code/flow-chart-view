@@ -3,11 +3,11 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 16:12:08
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-23 16:56:49
+ * @LastEditTime: 2022-08-25 13:24:21
  * @Description: 
  */
-import { shallowRef } from "vue";
-import { flow, isArray, transform } from "lodash";
+import { unref, shallowRef, computed } from "vue";
+import { flow, isArray } from "lodash";
 import { useTransform } from "@/composable/Tree";
 
 const { setupTree } = useTransform();
@@ -33,23 +33,40 @@ function toEdges(cell) {
 }
 
 export function useLayout() {
-    const nodes = [];
-    const edges = [];
+    const nodes = shallowRef([]);
+    const edges = shallowRef([]);
 
     function toTransform(rawdata) {
         usableData(rawdata).forEach((cell) => {
             const { hasChild, children } = cell;
-            nodes.push(toNodes(cell));
+            nodes.value.push(toNodes(cell));
             if (hasChild) {
-                edges.push(toEdges(cell));
+                edges.value.push(toEdges(cell));
                 toTransform(children);
             }
         });
     }
 
     return {
-        nodes,
-        edges,
+        nodes: computed(() => {
+            const { id, level } = unref(nodes).at(-1);
+            return [...unref(nodes), {
+                name: "结束",
+                pid: id,
+                id: "endnode",
+                nodeKey: "endnode",
+                component: "EndNode",
+                level: level + 1,
+                data: {
+                    click: false,
+                    mouse: false
+                }
+            }];
+        }),
+        edges: computed(() => {
+            const { nodeKey } = unref(nodes).at(-1);
+            return [...unref(edges), { from: nodeKey, to: ["endnode"] }]
+        }),
         toTransform
     }
 }

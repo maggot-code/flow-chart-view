@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 09:14:43
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-24 18:05:04
+ * @LastEditTime: 2022-08-25 13:19:54
  * @Description: 
 -->
 <script setup>
@@ -21,12 +21,12 @@ const visabled = computed(() => !unref(loading));
 
 function handlerGraph({ refs, graph, view }) {
     const { clientWidth, clientHeight } = refs;
-    const nodeCut = (clientHeight / nodes.length);
+    const nodeCut = (clientHeight / unref(nodes).length);
     const nodeW = 200;
     const nodeH = 60;
     const nodeX = (clientWidth / 2) - (nodeW / 2);
     const offset = (nodeCut - 20) <= nodeH ? nodeH + 20 : nodeCut;
-    const graphNodes = nodes.map((node) => {
+    const graphNodes = unref(nodes).map((node) => {
         const { nodeKey: id, name, level, component, data } = node;
         return graph.addNode({
             id,
@@ -41,7 +41,7 @@ function handlerGraph({ refs, graph, view }) {
         });
     });
 
-    edges.map((edge, index, source) => {
+    unref(edges).map((edge, index, source) => {
         const { from, to } = edge;
         const fromIndex = findIndex(graphNodes, (node) => node.id === from);
         return to.map((id) => {
@@ -88,7 +88,7 @@ onMounted(() => {
                 stroke-dashoffset: -1000
             }
         }
-    `)
+    `);
     toTransform(TestJson);
     loading.value = false;
 });

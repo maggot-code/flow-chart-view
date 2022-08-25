@@ -7,18 +7,6 @@
                         {
                             "children": [
                                 {
-                                    "children": [
-                                        {
-                                            "name": "结束",
-                                            "pid": "NA2123_reply",
-                                            "id": "endnode",
-                                            "component": "EndNode",
-                                            "data": {
-                                                "click": false,
-                                                "mouse": false
-                                            }
-                                        }
-                                    ],
                                     "name": "待处长审核",
                                     "pid": "_g3p5kq9K",
                                     "id": "NA2123_reply",
