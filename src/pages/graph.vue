@@ -3,13 +3,14 @@
  * @Author: maggot-code
  * @Date: 2022-08-24 13:47:30
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-24 14:29:33
+ * @LastEditTime: 2022-08-25 13:31:54
  * @Description: http://10.1.1.96:30100/api/example/system/flowchar/getBpmChartTree?prociontid=653649459409846272
 -->
 <script setup>
 import GraphContainer from '@/component/Graphics/GraphContainer.vue';
-import { watchEffect, unref, computed, ref } from "vue";
+import { onMounted, watchEffect, unref, computed, ref } from "vue";
 import { isNil, findIndex } from "lodash";
+import insertCss from 'insert-css';
 import { useRoute } from "vue-router";
 import { useFetch } from "@vueuse/core";
 import { useLayout } from "@/composable/Graphics/useLayout";
@@ -27,56 +28,73 @@ const url = computed(() => {
 });
 const { isFinished, data, error } = useFetch(url);
 
-function handlerGraph({ graph, view }) {
-    const graphNodes = nodes.map((node) => {
-        console.log(node);
-        const { nodeKey: id, name, state, level } = node;
-        const data = { name, state };
+function handlerGraph({ refs, graph, view }) {
+    const { clientWidth, clientHeight } = refs;
+    // 根据容器高度得到每个节点可以占用的高度值是多少
+    const nodeCut = (clientHeight / unref(nodes).length);
+    const nodeW = 200;
+    const nodeH = 60;
+    // 将节点定位在容器中心位置
+    const nodeX = (clientWidth / 2) - (nodeW / 2);
+    // 如果每个节点占用高度值比默认高度小那么就不能在继续缩小高度了
+    const offset = (nodeCut - 20) <= nodeH ? nodeH + 20 : nodeCut;
+
+    const graphNodes = unref(nodes).map((node) => {
+        const { nodeKey: id, name, level, component, data } = node;
         return graph.addNode({
             id,
-            data,
+            data: { ...data, name },
             view,
+            component,
             shape: 'vue-shape',
-            component: 'ExamineNode',
-            width: 200,
-            height: 60,
-            x: 400,
-            y: level * 160
+            width: nodeW,
+            height: nodeH,
+            x: nodeX,
+            y: (level + 0.2) * offset
         });
     });
 
-    edges.map((edge) => {
+    unref(edges).map((edge, index, source) => {
         const { from, to } = edge;
+        // 在图形节点中找到开始节点实例的索引
         const fromIndex = findIndex(graphNodes, (node) => node.id === from);
         return to.map((id) => {
-            const index = findIndex(graphNodes, (node) => node.id === id);
+            // 在图形节点中找到结束节点实例的索引
+            const targetIndex = findIndex(graphNodes, (node) => node.id === id);
+            const { data } = graphNodes[targetIndex];
+
+            const toLast = index === source.length - 1;
+            const toReach = isNil(data.state) || data.state === "unknown";
+
+            const targetMarker = toLast ? "circle" : "block";
+            const strokeDasharray = toReach ? 0 : 6;
+            const stroke = toReach ? "#ddd" : "#666";
+
             return graph.addEdge({
                 source: graphNodes[fromIndex],
-                target: graphNodes[index],
+                target: graphNodes[targetIndex],
+                attrs: {
+                    line: {
+                        style: {
+                            animation: 'ant-line 30s infinite linear'
+                        },
+                        stroke,
+                        strokeDasharray,
+                        targetMarker
+                    }
+                }
             });
         });
     });
+}
 
-    const endNode = graph.addNode({
-        id: "toend",
-        view,
-        shape: 'vue-shape',
-        component: 'EndNode',
-        width: 200,
-        height: 60,
-        x: 400,
-        y: graphNodes.length * 160
-    });
-    const lastNode = graphNodes.at(-1);
-    graph.addEdge({
-        source: lastNode,
-        target: endNode,
-        attrs: {
-            line: {
-                targetMarker: "circle",
-            },
-        },
-    });
+function handlerNodeClick(target) {
+    console.log(target);
+}
+function handlerNodeMouse(target) {
+    const { enter, leave } = target;
+    console.log("进入", enter);
+    console.log("离开", leave);
 }
 
 watchEffect(() => {
@@ -90,11 +108,23 @@ watchEffect(() => {
     toTransform(raw);
     loading.value = false;
 });
+
+onMounted(() => {
+    insertCss(`
+        @keyframes ant-line {
+            to {
+                stroke-dashoffset: -1000
+            }
+        }
+    `);
+});
 </script>
 
 <template>
     <div class="graph">
-        <graph-container v-if="visabled" @onReady="handlerGraph"></graph-container>
+        <graph-container v-if="visabled" @onReady="handlerGraph" @onNodeClick="handlerNodeClick"
+            @onNodeMouse="handlerNodeMouse">
+        </graph-container>
     </div>
 </template>
 
