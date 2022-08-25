@@ -1,16 +1,22 @@
 .node {
     color: #fff;
+    background-repeat: no-repeat;
+    background-size: 48px;
+    background-position: calc(100% - 12px) center;
 
     &-finish {
         background-color: #67C23A;
+        background-image: url("@/assets/icon/state/finish.png");
     }
 
     &-pending {
         background-color: #E6A23C;
+        background-image: url("@/assets/icon/state/finish.png");
     }
 
     &-refuse {
-        background-color: #F56C6C
+        background-color: #F56C6C;
+        background-image: url("@/assets/icon/state/finish.png");
     }
 
     &-unknown {

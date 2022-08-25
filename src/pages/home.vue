@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 09:14:43
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-25 13:32:31
+ * @LastEditTime: 2022-08-25 14:19:32
  * @Description: 
 -->
 <script setup>
@@ -23,8 +23,8 @@ function handlerGraph({ refs, graph, view }) {
     const { clientWidth, clientHeight } = refs;
     // 根据容器高度得到每个节点可以占用的高度值是多少
     const nodeCut = (clientHeight / unref(nodes).length);
-    const nodeW = 200;
-    const nodeH = 60;
+    const nodeW = 240;
+    const nodeH = 80;
     // 将节点定位在容器中心位置
     const nodeX = (clientWidth / 2) - (nodeW / 2);
     // 如果每个节点占用高度值比默认高度小那么就不能在继续缩小高度了

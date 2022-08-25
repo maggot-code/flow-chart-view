@@ -1,9 +1,9 @@
 <!--
- * @FilePath: \flow-chart-view\src\component\Graphics\Nodes\EndNode.vue
+ * @FilePath: \flow-chart-view\src\component\Graphics\nodes\EndNode.vue
  * @Author: maggot-code
  * @Date: 2022-08-23 15:56:05
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-23 16:02:02
+ * @LastEditTime: 2022-08-25 14:03:13
  * @Description: 
 -->
 <script setup></script>
@@ -18,6 +18,8 @@
 @import "./node.scss";
 
 .node-end {
+    display: flex;
+    justify-content: center;
     text-align: center;
 }
 </style>

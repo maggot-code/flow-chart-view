@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 16:00:25
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-24 17:51:27
+ * @LastEditTime: 2022-08-25 14:22:06
  * @Description: 
 -->
 <script setup >
@@ -29,7 +29,10 @@ const infoStyle = computed(() => {
 
 <template>
     <div class="node node-examine" ref="nodeRefs" :class="className">
-        <p>{{ name }}</p>
+        <div class="node-examine-icon">
+            <img src="@/assets/icon/state/user.png" :alt="name">
+        </div>
+        <p class="node-examine-text">{{ name }}</p>
         <div class="node-examine-info" :style="infoStyle">
             <template v-if="toReach">
                 <p class="node-examine-info-cell">{{ info[0].name }}</p>
@@ -47,7 +50,33 @@ const infoStyle = computed(() => {
 @import "./state.scss";
 
 .node-examine {
+    display: flex;
     position: relative;
+    align-items: center;
+    padding: 8px;
+    border-radius: 3px;
+    box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, .04),
+        0px 8px 20px rgba(0, 0, 0, .08);
+    cursor: pointer;
+
+    &-icon {
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        font-size: 0;
+        margin-right: 12px;
+        overflow: hidden;
+
+        &>img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &-text {
+        font-size: 16px;
+    }
 
     &-info {
         position: absolute;
@@ -56,9 +85,14 @@ const infoStyle = computed(() => {
         background-color: #eee;
         padding: 6px;
         box-sizing: border-box;
+        box-shadow: 0px 16px 48px 16px rgba(0, 0, 0, .08),
+            0px 12px 32px rgba(0, 0, 0, .12),
+            0px 8px 16px -8px rgba(0, 0, 0, .16);
 
         &-cell {
-            color: #999;
+            height: 24px;
+            line-height: 24px;
+            color: #333;
         }
 
         &-remarks {
