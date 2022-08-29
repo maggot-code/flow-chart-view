@@ -11,12 +11,12 @@
 
     &-pending {
         background-color: #E6A23C;
-        background-image: url("@/assets/icon/state/finish.png");
+        background-image: url("@/assets/icon/state/pending.png");
     }
 
     &-refuse {
         background-color: #F56C6C;
-        background-image: url("@/assets/icon/state/finish.png");
+        background-image: url("@/assets/icon/state/refuse.png");
     }
 
     &-unknown {

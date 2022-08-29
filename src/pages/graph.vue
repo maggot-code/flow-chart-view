@@ -3,37 +3,43 @@
  * @Author: maggot-code
  * @Date: 2022-08-24 13:47:30
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-25 13:31:54
+ * @LastEditTime: 2022-08-29 16:32:48
  * @Description: http://10.1.1.96:30100/api/example/system/flowchar/getBpmChartTree?prociontid=653649459409846272
 -->
 <script setup>
+import TestJson from "@/assets/json/v3.test.json";
 import GraphContainer from '@/component/Graphics/GraphContainer.vue';
-import { onMounted, watchEffect, unref, computed, ref } from "vue";
+import { onMounted, onBeforeUnmount, watchEffect, unref, computed } from "vue";
+import { ElMessage } from 'element-plus'
 import { isNil, findIndex } from "lodash";
 import insertCss from 'insert-css';
 import { useRoute } from "vue-router";
 import { useFetch } from "@vueuse/core";
 import { useLayout } from "@/composable/Graphics/useLayout";
 
-const { nodes, edges, toTransform } = useLayout();
-const loading = ref(true);
-const visabled = computed(() => !unref(loading));
-
 const SERVICE_URL = "/api/example/system/flowchar/getBpmChartTree";
 const route = useRoute();
 const url = computed(() => {
     const { prociontid } = unref(route.params);
+    const params = Object.assign({}, route.query, { prociontid });
+    const data = Reflect.ownKeys(params).map((key) => `${key}=${params[key]}`).join("&");
 
-    return SERVICE_URL + `?prociontid=${prociontid}`;
+    return `${SERVICE_URL}?${data}`;
 });
-const { isFinished, data, error } = useFetch(url);
+const { isFinished, error, data } = useFetch(url);
+
+const { nodes, edges, toTransform } = useLayout();
+const isError = computed(() => isNil(unref(error)));
+const visabled = computed(() => {
+    return unref(isError) && unref(isFinished);
+});
 
 function handlerGraph({ refs, graph, view }) {
     const { clientWidth, clientHeight } = refs;
     // 根据容器高度得到每个节点可以占用的高度值是多少
     const nodeCut = (clientHeight / unref(nodes).length);
-    const nodeW = 200;
-    const nodeH = 60;
+    const nodeW = 240;
+    const nodeH = 80;
     // 将节点定位在容器中心位置
     const nodeX = (clientWidth / 2) - (nodeW / 2);
     // 如果每个节点占用高度值比默认高度小那么就不能在继续缩小高度了
@@ -87,7 +93,6 @@ function handlerGraph({ refs, graph, view }) {
         });
     });
 }
-
 function handlerNodeClick(target) {
     console.log(target);
 }
@@ -99,17 +104,19 @@ function handlerNodeMouse(target) {
 
 watchEffect(() => {
     if (!unref(isFinished)) return;
-    if (!isNil(unref(error))) {
+    if (!unref(isError)) {
         console.log(unref(error));
+        ElMessage.error({ center: true, showClose: true, duration: 0, message: "请求失败 | 数据未找到" });
         return;
     }
-
+    // ElMessage.error({ center: true, showClose: true, duration: 0, message: "请求失败 | 数据未找到" });
     const raw = JSON.parse(unref(data));
-    toTransform(raw);
-    loading.value = false;
+    // toTransform(raw);
+    toTransform(TestJson);
 });
 
 onMounted(() => {
+    ElMessage.closeAll();
     insertCss(`
         @keyframes ant-line {
             to {
@@ -118,10 +125,13 @@ onMounted(() => {
         }
     `);
 });
+onBeforeUnmount(() => {
+    ElMessage.closeAll();
+});
 </script>
 
 <template>
-    <div class="graph">
+    <div class="graph" v-loading="!visabled" element-loading-background="rgba(3, 3, 3, 0.3)">
         <graph-container v-if="visabled" @onReady="handlerGraph" @onNodeClick="handlerNodeClick"
             @onNodeMouse="handlerNodeMouse">
         </graph-container>

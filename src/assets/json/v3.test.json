@@ -1,0 +1,235 @@
+{
+    "component": "ExamineNode",
+    "data": {
+        "mouse": "false",
+        "dbclick": "false",
+        "state": "finish",
+        "click": "false",
+        "info": [
+            {
+                "finishTime": "20220817185415",
+                "code": "10003359",
+                "createTime": "20220809173439",
+                "name": "陈永辉",
+                "attributes": {},
+                "type": "user",
+                "timeout": false
+            }
+        ]
+    },
+    "children": [
+        {
+            "component": "ExamineNode",
+            "children": [
+                {
+                    "component": "ExamineNode",
+                    "data": {
+                        "mouse": "false",
+                        "dbclick": "false",
+                        "state": "unknown",
+                        "click": "false",
+                        "info": [
+                            {
+                                "finishTime": "",
+                                "code": "10353093",
+                                "createTime": "20220824194643",
+                                "name": "金峰",
+                                "attributes": {
+                                    "leader": null,
+                                    "_PARTICIPANT_ORG_NAME": "中煤平朔集团有限公司",
+                                    "orgName": null,
+                                    "level": "2",
+                                    "_PARTICIPANT_ORG": "xz-zmny-zmpsjt",
+                                    "fullNamePath": "null/金峰",
+                                    "realName": "金峰",
+                                    "isIAM": "true",
+                                    "orgCode": "xz-zmny-zmpsjt",
+                                    "nickname": "金峰",
+                                    "supervisor": null,
+                                    "email": "",
+                                    "mainOrgCode": "xz-zmny-zmpsjt",
+                                    "username": "10353093"
+                                },
+                                "type": "user",
+                                "timeout": false
+                            },
+                            {
+                                "finishTime": "",
+                                "code": "ceshi",
+                                "createTime": "20220824194644",
+                                "name": "测试",
+                                "attributes": {
+                                    "leader": null,
+                                    "_PARTICIPANT_ORG_NAME": "中煤平朔集团有限公司",
+                                    "orgName": null,
+                                    "level": "2",
+                                    "_PARTICIPANT_ORG": "xz-zmny-zmpsjt",
+                                    "fullNamePath": "null/测试",
+                                    "realName": "测试",
+                                    "isIAM": "true",
+                                    "orgCode": "xz-zmny-zmpsjt",
+                                    "nickname": "测试",
+                                    "supervisor": null,
+                                    "email": "",
+                                    "mainOrgCode": "xz-zmny-zmpsjt",
+                                    "username": "ceshi"
+                                },
+                                "type": "user",
+                                "timeout": false
+                            },
+                            {
+                                "finishTime": "",
+                                "code": "psgl",
+                                "createTime": "20220824194645",
+                                "name": "平朔管理",
+                                "attributes": {
+                                    "leader": null,
+                                    "_PARTICIPANT_ORG_NAME": "中煤平朔集团有限公司",
+                                    "orgName": null,
+                                    "level": "2",
+                                    "_PARTICIPANT_ORG": "xz-zmny-zmpsjt",
+                                    "fullNamePath": "null/平朔管理",
+                                    "realName": "平朔管理",
+                                    "isIAM": "true",
+                                    "orgCode": "xz-zmny-zmpsjt",
+                                    "nickname": "平朔管理",
+                                    "supervisor": null,
+                                    "email": "",
+                                    "mainOrgCode": "xz-zmny-zmpsjt",
+                                    "username": "psgl"
+                                },
+                                "type": "user",
+                                "timeout": false
+                            }
+                        ]
+                    },
+                    "children": [
+                        {
+                            "component": "ExamineNode",
+                            "data": {
+                                "mouse": "false",
+                                "dbclick": "false",
+                                "state": "unknown",
+                                "click": "false",
+                                "info": []
+                            },
+                            "children": [
+                                {
+                                    "component": "ExamineNode",
+                                    "data": {
+                                        "mouse": "false",
+                                        "dbclick": "false",
+                                        "state": "unknown",
+                                        "click": "false",
+                                        "info": [
+                                            {
+                                                "finishTime": null,
+                                                "code": "10353093",
+                                                "createTime": null,
+                                                "name": "金峰",
+                                                "attributes": {
+                                                    "leader": null,
+                                                    "_PARTICIPANT_ORG_NAME": "中煤平朔集团有限公司",
+                                                    "orgName": null,
+                                                    "level": "2",
+                                                    "_PARTICIPANT_ORG": "org@xz-zmny-zmpsjt",
+                                                    "fullNamePath": "null/金峰",
+                                                    "realName": "金峰",
+                                                    "isIAM": "true",
+                                                    "orgCode": "xz-zmny-zmpsjt",
+                                                    "nickname": "金峰",
+                                                    "ruleName": null,
+                                                    "supervisor": null,
+                                                    "email": "",
+                                                    "mainOrgCode": "xz-zmny-zmpsjt",
+                                                    "username": "10353093"
+                                                },
+                                                "type": "user",
+                                                "timeout": false
+                                            },
+                                            {
+                                                "finishTime": null,
+                                                "code": "ceshi",
+                                                "createTime": null,
+                                                "name": "测试",
+                                                "attributes": {
+                                                    "leader": null,
+                                                    "_PARTICIPANT_ORG_NAME": "中煤平朔集团有限公司",
+                                                    "orgName": null,
+                                                    "level": "2",
+                                                    "_PARTICIPANT_ORG": "org@xz-zmny-zmpsjt",
+                                                    "fullNamePath": "null/测试",
+                                                    "realName": "测试",
+                                                    "isIAM": "true",
+                                                    "orgCode": "xz-zmny-zmpsjt",
+                                                    "nickname": "测试",
+                                                    "ruleName": null,
+                                                    "supervisor": null,
+                                                    "email": "",
+                                                    "mainOrgCode": "xz-zmny-zmpsjt",
+                                                    "username": "ceshi"
+                                                },
+                                                "type": "user",
+                                                "timeout": false
+                                            },
+                                            {
+                                                "finishTime": null,
+                                                "code": "psgl",
+                                                "createTime": null,
+                                                "name": "平朔管理",
+                                                "attributes": {
+                                                    "leader": null,
+                                                    "_PARTICIPANT_ORG_NAME": "中煤平朔集团有限公司",
+                                                    "orgName": null,
+                                                    "level": "2",
+                                                    "_PARTICIPANT_ORG": "org@xz-zmny-zmpsjt",
+                                                    "fullNamePath": "null/平朔管理",
+                                                    "realName": "平朔管理",
+                                                    "isIAM": "true",
+                                                    "orgCode": "xz-zmny-zmpsjt",
+                                                    "nickname": "平朔管理",
+                                                    "ruleName": null,
+                                                    "supervisor": null,
+                                                    "email": "",
+                                                    "mainOrgCode": "xz-zmny-zmpsjt",
+                                                    "username": "psgl"
+                                                },
+                                                "type": "user",
+                                                "timeout": false
+                                            }
+                                        ]
+                                    },
+                                    "name": "待处长审核",
+                                    "pid": "_g3p5kq9K",
+                                    "id": "NA2123_reply",
+                                    "type": "approver"
+                                }
+                            ],
+                            "name": "待指定人员审核",
+                            "pid": "M7ic6sdtM_forward",
+                            "id": "_g3p5kq9K",
+                            "type": "approver"
+                        }
+                    ],
+                    "name": "待处长指定审核",
+                    "pid": "1jpwN64r6",
+                    "id": "M7ic6sdtM_forward",
+                    "type": "approver"
+                }
+            ],
+            "name": "二级企业待审核",
+            "pid": "startnode",
+            "id": "1jpwN64r6",
+            "type": "approver",
+            "data": {
+                "mouse": "false",
+                "dbclick": "false",
+                "state": "pending",
+                "click": "false"
+            }
+        }
+    ],
+    "name": "发起",
+    "id": "startnode",
+    "type": "start"
+}

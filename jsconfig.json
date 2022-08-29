@@ -1,11 +1,16 @@
 {
     "compilerOptions": {
         "baseUrl": "./",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
         "paths": {
             "@/*": [
                 "src/*"
             ]
         },
+        "types": [
+            "element-plus/global"
+        ],
         "jsx": "preserve"
     },
     "exclude": [

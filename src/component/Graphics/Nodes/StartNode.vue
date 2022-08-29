@@ -1,9 +1,9 @@
 <!--
- * @FilePath: \flow-chart-view\src\component\Graphics\Nodes\StartNode.vue
+ * @FilePath: \flow-chart-view\src\component\Graphics\nodes\StartNode.vue
  * @Author: maggot-code
  * @Date: 2022-08-24 15:00:08
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-24 16:23:20
+ * @LastEditTime: 2022-08-29 14:06:40
  * @Description: 
 -->
 <script setup>
@@ -17,7 +17,7 @@ const { className } = useState(state);
 
 <template>
     <div class="node node-start" :class="className">
-        <p>{{ name }}</p>
+        <p>{{  name  }}</p>
     </div>
 </template>
 

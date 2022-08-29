@@ -3,16 +3,24 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 16:00:25
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-25 14:35:07
+ * @LastEditTime: 2022-08-29 15:04:59
  * @Description: 
 -->
 <script setup >
 import { inject, unref, ref, computed } from "vue";
+import { isNil, isString } from "lodash";
+import dayjs from "dayjs";
 import { useState } from "../usecase/useState";
 
 const getNode = inject("getNode");
 const node = getNode();
-const { name, state, info } = node.data;
+const defaultNodeData = {
+    name: "未命名步骤",
+    state: "unknow",
+    info: []
+};
+const { name, state, info } = Object.assign({}, defaultNodeData, node?.data ?? {});
+const hasInfo = computed(() => info.length > 0);
 const { className, toReach, toRemarks } = useState(state);
 
 const nodeRefs = ref(null);
@@ -25,6 +33,33 @@ const infoStyle = computed(() => {
         left: `${clientWidth + 12}px`
     }
 });
+
+// 展示信息
+function isUnusable(value) {
+    return isNil(value) || (isString(value) && value.length <= 0);
+}
+function toDate(rawValue) {
+    if (isUnusable(rawValue)) return [false, ""];
+
+    return [
+        true,
+        dayjs(rawValue).format("YYYY-MM-DD")
+    ];
+}
+const displayInfo = computed(() => {
+    const [{ name, timeout, finishTime, createTime }] = info;
+    const timeoutValue = timeout ? "已超时" : "未超时";
+    const data = [
+        { key: "name", value: name },
+        { key: "timeout", value: timeoutValue }
+    ];
+    const [createTimeShow, createTimeValue] = toDate(createTime);
+    const [finishTimeSHow, finishTimeValue] = toDate(finishTime);
+    if (createTimeShow && state !== "finish") data.push({ key: "createTime", value: createTimeValue });
+    if (finishTimeSHow && state === "finish") data.push({ key: "finishTime", value: finishTimeValue });
+
+    return data;
+});
 </script>
 
 <template>
@@ -32,15 +67,17 @@ const infoStyle = computed(() => {
         <div class="node-examine-icon">
             <img src="@/assets/icon/state/user.png" :alt="name">
         </div>
-        <p class="node-examine-text">{{ name }}</p>
-        <div class="node-examine-info" :style="infoStyle">
+        <p class="node-examine-text">{{  name  }}</p>
+        <div class="node-examine-info" v-if="hasInfo" :style="infoStyle">
             <template v-if="toReach">
-                <p class="node-examine-info-cell">{{ info[0].name }}</p>
-                <p class="node-examine-info-cell">{{ info[0].date }}</p>
-                <p v-if="toRemarks" class="node-examine-info-cell node-examine-info-remarks">备注：{{ info[0].remarks }}
+                <template v-for="(item) in displayInfo" :key="item.key">
+                    <p class="node-examine-info-cell">{{  item.value  }}</p>
+                </template>
+
+                <p v-if="toRemarks" class="node-examine-info-cell node-examine-info-remarks">备注：{{  info[0].remarks  }}
                 </p>
             </template>
-            <p v-else class="node-examine-info-cell">{{ info.map(item => item.name).join(", ") }}</p>
+            <p v-else class="node-examine-info-cell">{{  info.map(item => item.name).join(", ")  }}</p>
         </div>
     </div>
 </template>

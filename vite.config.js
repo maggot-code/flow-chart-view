@@ -3,12 +3,14 @@
  * @Author: maggot-code
  * @Date: 2022-08-18 16:00:07
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-24 14:17:34
+ * @LastEditTime: 2022-08-29 16:04:28
  * @Description:
  */
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import autopImport from 'unplugin-auto-import/vite';
+import components from 'unplugin-vue-components/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -24,7 +26,7 @@ export default defineConfig({
         },
         proxy: {
             '/api': {
-                target: 'http://10.1.1.96:30100/',
+                target: 'http://10.1.1.130:30100/',
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, '/api')
             },
@@ -55,8 +57,12 @@ export default defineConfig({
     plugins: [
         vue(),
         autopImport({
+            resolvers: [ElementPlusResolver()],
             imports: ['vue', 'vitest'],
             dts: true,
+        }),
+        components({
+            resolvers: [ElementPlusResolver()],
         }),
     ],
     optimizeDeps: {
