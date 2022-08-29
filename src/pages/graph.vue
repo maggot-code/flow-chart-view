@@ -3,11 +3,10 @@
  * @Author: maggot-code
  * @Date: 2022-08-24 13:47:30
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-29 16:32:48
+ * @LastEditTime: 2022-08-29 17:00:41
  * @Description: http://10.1.1.96:30100/api/example/system/flowchar/getBpmChartTree?prociontid=653649459409846272
 -->
 <script setup>
-import TestJson from "@/assets/json/v3.test.json";
 import GraphContainer from '@/component/Graphics/GraphContainer.vue';
 import { onMounted, onBeforeUnmount, watchEffect, unref, computed } from "vue";
 import { ElMessage } from 'element-plus'
@@ -109,10 +108,8 @@ watchEffect(() => {
         ElMessage.error({ center: true, showClose: true, duration: 0, message: "请求失败 | 数据未找到" });
         return;
     }
-    // ElMessage.error({ center: true, showClose: true, duration: 0, message: "请求失败 | 数据未找到" });
     const raw = JSON.parse(unref(data));
-    // toTransform(raw);
-    toTransform(TestJson);
+    toTransform(raw);
 });
 
 onMounted(() => {
