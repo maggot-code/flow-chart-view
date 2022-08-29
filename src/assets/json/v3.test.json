@@ -1,10 +1,10 @@
 {
     "component": "ExamineNode",
     "data": {
-        "mouse": "false",
-        "dbclick": "false",
+        "mouse": false,
+        "dbclick": false,
         "state": "finish",
-        "click": "false",
+        "click": true,
         "info": [
             {
                 "finishTime": "20220817185415",
@@ -20,14 +20,40 @@
     "children": [
         {
             "component": "ExamineNode",
+            "data": {
+                "mouse": false,
+                "dbclick": false,
+                "state": "pending",
+                "click": true,
+                "info": [
+                    {
+                        "finishTime": "20220824194642",
+                        "code": "10003359",
+                        "createTime": "20220817185415",
+                        "name": "陈永辉",
+                        "attributes": {},
+                        "type": "user",
+                        "timeout": false
+                    },
+                    {
+                        "finishTime": "20220824194642",
+                        "code": "10003359",
+                        "createTime": "20220817185415",
+                        "name": "陈永辉",
+                        "attributes": {},
+                        "type": "user",
+                        "timeout": false
+                    }
+                ]
+            },
             "children": [
                 {
                     "component": "ExamineNode",
                     "data": {
-                        "mouse": "false",
-                        "dbclick": "false",
+                        "mouse": false,
+                        "dbclick": false,
                         "state": "unknown",
-                        "click": "false",
+                        "click": false,
                         "info": [
                             {
                                 "finishTime": "",
@@ -107,20 +133,20 @@
                         {
                             "component": "ExamineNode",
                             "data": {
-                                "mouse": "false",
-                                "dbclick": "false",
+                                "mouse": false,
+                                "dbclick": false,
                                 "state": "unknown",
-                                "click": "false",
+                                "click": false,
                                 "info": []
                             },
                             "children": [
                                 {
                                     "component": "ExamineNode",
                                     "data": {
-                                        "mouse": "false",
-                                        "dbclick": "false",
+                                        "mouse": false,
+                                        "dbclick": false,
                                         "state": "unknown",
-                                        "click": "false",
+                                        "click": false,
                                         "info": [
                                             {
                                                 "finishTime": null,
@@ -220,13 +246,7 @@
             "name": "二级企业待审核",
             "pid": "startnode",
             "id": "1jpwN64r6",
-            "type": "approver",
-            "data": {
-                "mouse": "false",
-                "dbclick": "false",
-                "state": "pending",
-                "click": "false"
-            }
+            "type": "approver"
         }
     ],
     "name": "发起",

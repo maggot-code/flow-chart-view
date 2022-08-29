@@ -3,11 +3,11 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 15:44:25
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-24 16:19:04
+ * @LastEditTime: 2022-08-29 17:38:17
  * @Description: 
 -->
 <script setup>
-import { onMounted, onUnmounted, unref, shallowRef, ref } from "vue";
+import { provide, onMounted, onUnmounted, unref, shallowRef, ref } from "vue";
 import { Graph } from "@antv/x6";
 import { useTeleport } from "@antv/x6-vue-shape";
 import { v4 } from "uuid";
@@ -17,7 +17,15 @@ const TeleportId = v4();
 const TeleportView = useTeleport(TeleportId);
 const graphRefs = ref(null);
 const graph = shallowRef(null);
+
 const emits = defineEmits(["onReady", "onNodeClick", "onNodeMouse"]);
+const props = defineProps({
+    info: {
+        type: Object,
+        default: () => ({})
+    }
+});
+provide("graphInfo", props.info);
 function toEvent(data, type, def = false) {
     const hasState = isBoolean(data[type]);
     return hasState ? data[type] : def;

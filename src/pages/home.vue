@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 09:14:43
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-29 15:29:58
+ * @LastEditTime: 2022-08-29 17:41:21
  * @Description: 
 -->
 <script setup>
@@ -18,6 +18,7 @@ import { onMounted, unref, ref, computed } from "vue";
 const { nodes, edges, toTransform } = useLayout();
 const loading = ref(true);
 const visabled = computed(() => !unref(loading));
+const graphInfo = { projid: 111 };
 
 function handlerGraph({ refs, graph, view }) {
     const { clientWidth, clientHeight } = refs;
@@ -78,7 +79,6 @@ function handlerGraph({ refs, graph, view }) {
         });
     });
 }
-
 function handlerNodeClick(target) {
     console.log(target);
 }
@@ -103,7 +103,7 @@ onMounted(() => {
 
 <template>
     <div class="home">
-        <graph-container v-if="visabled" @onReady="handlerGraph" @onNodeClick="handlerNodeClick"
+        <graph-container v-if="visabled" :info="graphInfo" @onReady="handlerGraph" @onNodeClick="handlerNodeClick"
             @onNodeMouse="handlerNodeMouse">
         </graph-container>
     </div>

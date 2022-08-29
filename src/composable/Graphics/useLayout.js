@@ -3,15 +3,20 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 16:12:08
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-29 16:15:31
+ * @LastEditTime: 2022-08-29 17:44:12
  * @Description: 
  */
 import { unref, computed, shallowRef } from "vue";
 import { flow, isArray } from "lodash";
-import { useTransform } from "@/composable/Tree";
+import { useTransform, mergeNodeToProps } from "@/composable/Tree";
 
-const { setupTree } = useTransform();
+const { setupTree } = useTransform([saveMetaData]);
 
+function saveMetaData(config) {
+    const { id, pid } = config;
+    const data = { ...config.data, meta: { id, pid } };
+    return mergeNodeToProps(config, { data });
+}
 function toArray(data) {
     return isArray(data) ? data : [data];
 }
