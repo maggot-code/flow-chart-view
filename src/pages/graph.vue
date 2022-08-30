@@ -3,13 +3,13 @@
  * @Author: maggot-code
  * @Date: 2022-08-24 13:47:30
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-29 17:00:41
+ * @LastEditTime: 2022-08-30 11:24:03
  * @Description: http://10.1.1.96:30100/api/example/system/flowchar/getBpmChartTree?prociontid=653649459409846272
 -->
 <script setup>
 import GraphContainer from '@/component/Graphics/GraphContainer.vue';
 import { onMounted, onBeforeUnmount, watchEffect, unref, computed } from "vue";
-import { ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus';
 import { isNil, findIndex } from "lodash";
 import insertCss from 'insert-css';
 import { useRoute } from "vue-router";

@@ -3,12 +3,12 @@
  * @Author: maggot-code
  * @Date: 2022-08-29 17:10:33
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-30 11:21:28
+ * @LastEditTime: 2022-08-30 11:26:46
  * @Description: 
 -->
 <script setup>
-import TestData from "@/assets/json/v2.table.json";
 import { onMounted, onBeforeUnmount, inject, watchEffect, unref, computed } from "vue";
+import { ElMessage } from 'element-plus';
 import { isNil } from "lodash";
 import dayjs from "dayjs";
 import { useRoute } from "vue-router";
@@ -21,7 +21,7 @@ const route = useRoute();
 const { meta } = node.data;
 const url = computed(() => {
     const { prociontid } = unref(route.params);
-    const params = Object.assign({}, route.query, { prociontid: "653649459409846272", ...meta });
+    const params = Object.assign({}, route.query, { prociontid, ...meta });
     const data = Reflect.ownKeys(params).map((key) => `${key}=${params[key]}`).join("&");
 
     return `${SERVICE_URL}?${data}`;
@@ -39,15 +39,19 @@ watchEffect(() => {
     if (!unref(isFinished)) return;
     if (!unref(isError)) {
         console.log(unref(error));
+        ElMessage.error({ center: true, showClose: true, duration: 0, message: "日志列表加载失败" });
         return;
     }
-
-    const raw = JSON.parse(unref(data));
-    console.log(raw);
 });
 
-onMounted(abort);
-onBeforeUnmount(abort);
+onMounted(() => {
+    ElMessage.closeAll();
+    abort();
+});
+onBeforeUnmount(() => {
+    ElMessage.closeAll();
+    abort();
+});
 </script>
 
 <template>
@@ -66,8 +70,8 @@ onBeforeUnmount(abort);
             <el-skeleton-item variant="p" />
         </template>
         <template #default>
-            <el-table class="log-table-body" size="small" max-height="220" table-layout="fixed" :border="true"
-                :stripe="true" :data="JSON.parse(unref(data))">
+            <el-table class="log-table-body" size="small" max-height="220" table-layout="fixed" empty-text="没有日志列表"
+                :border="true" :stripe="true" :data="JSON.parse(unref(data))">
                 <el-table-column property="createTime" label="完成时间" width="140" align="center">
                     <template #default="scope">
                         <p>{{  toDate(scope, "createTime")  }}</p>
