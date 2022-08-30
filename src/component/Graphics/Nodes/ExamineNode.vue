@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 16:00:25
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-30 11:09:36
+ * @LastEditTime: 2022-08-30 11:21:09
  * @Description: 
 -->
 <script setup >
@@ -45,7 +45,7 @@ function toDate(rawValue) {
 
     return [
         true,
-        dayjs(rawValue).format("YYYY-MM-DD")
+        dayjs(rawValue).format("YYYY-MM-DD HH:mm:ss")
     ];
 }
 const displayInfo = computed(() => {
@@ -65,7 +65,7 @@ const displayInfo = computed(() => {
 </script>
 
 <template>
-    <el-popover trigger="hover" placement="left" :width="480" :disabled="hasPopoper"
+    <el-popover trigger="hover" placement="bottom" :width="480" :disabled="hasPopoper"
         :popper-options="{ gpuAcceleration: true }" :persistent="false">
         <template #reference>
             <div class="node node-examine" ref="nodeRefs" :class="className">

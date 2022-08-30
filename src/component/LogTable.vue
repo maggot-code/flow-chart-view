@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-29 17:10:33
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-30 11:11:10
+ * @LastEditTime: 2022-08-30 11:21:28
  * @Description: 
 -->
 <script setup>
@@ -32,7 +32,7 @@ function toDate(scope, key) {
     const { row } = scope;
     if (!dayjs(row[key]).isValid()) return "暂无时间";
 
-    return dayjs(row[key]).format("YYYY-MM-DD");
+    return dayjs(row[key]).format("YYYY-MM-DD HH:mm:ss");
 }
 
 watchEffect(() => {
@@ -68,7 +68,7 @@ onBeforeUnmount(abort);
         <template #default>
             <el-table class="log-table-body" size="small" max-height="220" table-layout="fixed" :border="true"
                 :stripe="true" :data="JSON.parse(unref(data))">
-                <el-table-column property="createTime" label="完成时间" width="120" align="center">
+                <el-table-column property="createTime" label="完成时间" width="140" align="center">
                     <template #default="scope">
                         <p>{{  toDate(scope, "createTime")  }}</p>
                     </template>
