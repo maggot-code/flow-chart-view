@@ -3,13 +3,14 @@
  * @Author: maggot-code
  * @Date: 2022-08-29 17:10:33
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-30 09:44:39
+ * @LastEditTime: 2022-08-30 11:11:10
  * @Description: 
 -->
 <script setup>
-import TestData from "@/assets/json/v1.table.json";
+import TestData from "@/assets/json/v2.table.json";
 import { onMounted, onBeforeUnmount, inject, watchEffect, unref, computed } from "vue";
 import { isNil } from "lodash";
+import dayjs from "dayjs";
 import { useRoute } from "vue-router";
 import { useFetch } from "@vueuse/core";
 
@@ -27,6 +28,12 @@ const url = computed(() => {
 })
 const { isFinished, error, data, abort } = useFetch(url);
 const isError = computed(() => isNil(unref(error)));
+function toDate(scope, key) {
+    const { row } = scope;
+    if (!dayjs(row[key]).isValid()) return "暂无时间";
+
+    return dayjs(row[key]).format("YYYY-MM-DD");
+}
 
 watchEffect(() => {
     if (!unref(isFinished)) return;
@@ -50,15 +57,25 @@ onBeforeUnmount(abort);
                 <el-skeleton-item class="skeleton-table-head-row" variant="p" />
                 <el-skeleton-item class="skeleton-table-head-row" variant="p" />
                 <el-skeleton-item class="skeleton-table-head-row" variant="p" />
+                <el-skeleton-item class="skeleton-table-head-row" variant="p" />
             </div>
-            <el-skeleton-item variant="caption" style="height:200px;" />
+            <el-skeleton-item variant="p" />
+            <el-skeleton-item variant="p" />
+            <el-skeleton-item variant="p" />
+            <el-skeleton-item variant="p" />
+            <el-skeleton-item variant="p" />
         </template>
         <template #default>
-            <el-table class="log-table-body" max-height="240" table-layout="fixed" :border="true" :stripe="true"
-                :data="data">
-                <el-table-column width="150" property="date" label="date" />
-                <el-table-column width="100" property="name" label="name" />
-                <el-table-column width="300" property="address" label="address" />
+            <el-table class="log-table-body" size="small" max-height="220" table-layout="fixed" :border="true"
+                :stripe="true" :data="JSON.parse(unref(data))">
+                <el-table-column property="createTime" label="完成时间" width="120" align="center">
+                    <template #default="scope">
+                        <p>{{  toDate(scope, "createTime")  }}</p>
+                    </template>
+                </el-table-column>
+                <el-table-column property="operationTypeName" label="动作" width="80" />
+                <el-table-column property="producer" label="审批人" width="120" />
+                <el-table-column property="content" label="审核意见" />
             </el-table>
         </template>
     </el-skeleton>
