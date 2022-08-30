@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 16:12:08
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-29 17:44:12
+ * @LastEditTime: 2022-08-30 09:13:25
  * @Description: 
  */
 import { unref, computed, shallowRef } from "vue";
@@ -14,7 +14,7 @@ const { setupTree } = useTransform([saveMetaData]);
 
 function saveMetaData(config) {
     const { id, pid } = config;
-    const data = { ...config.data, meta: { id, pid } };
+    const data = { ...config.data, meta: { id, pid, actDefId: id } };
     return mergeNodeToProps(config, { data });
 }
 function toArray(data) {

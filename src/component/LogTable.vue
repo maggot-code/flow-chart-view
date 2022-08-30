@@ -3,12 +3,13 @@
  * @Author: maggot-code
  * @Date: 2022-08-29 17:10:33
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-29 18:07:39
+ * @LastEditTime: 2022-08-30 09:44:39
  * @Description: 
 -->
 <script setup>
 import TestData from "@/assets/json/v1.table.json";
-import { inject, watchEffect, unref, computed } from "vue";
+import { onMounted, onBeforeUnmount, inject, watchEffect, unref, computed } from "vue";
+import { isNil } from "lodash";
 import { useRoute } from "vue-router";
 import { useFetch } from "@vueuse/core";
 
@@ -24,11 +25,8 @@ const url = computed(() => {
 
     return `${SERVICE_URL}?${data}`;
 })
-const { isFinished, error, data } = useFetch(url);
+const { isFinished, error, data, abort } = useFetch(url);
 const isError = computed(() => isNil(unref(error)));
-const visabled = computed(() => {
-    return unref(isError) && unref(isFinished);
-});
 
 watchEffect(() => {
     if (!unref(isFinished)) return;
@@ -40,18 +38,52 @@ watchEffect(() => {
     const raw = JSON.parse(unref(data));
     console.log(raw);
 });
+
+onMounted(abort);
+onBeforeUnmount(abort);
 </script>
 
 <template>
-    <el-table class="log-table" :data="data">
-        <el-table-column width="150" property="date" label="date" />
-        <el-table-column width="100" property="name" label="name" />
-        <el-table-column width="300" property="address" label="address" />
-    </el-table>
+    <el-skeleton class="log-table" animated :loading="!isFinished">
+        <template #template>
+            <div class="skeleton-table-head">
+                <el-skeleton-item class="skeleton-table-head-row" variant="p" />
+                <el-skeleton-item class="skeleton-table-head-row" variant="p" />
+                <el-skeleton-item class="skeleton-table-head-row" variant="p" />
+            </div>
+            <el-skeleton-item variant="caption" style="height:200px;" />
+        </template>
+        <template #default>
+            <el-table class="log-table-body" max-height="240" table-layout="fixed" :border="true" :stripe="true"
+                :data="data">
+                <el-table-column width="150" property="date" label="date" />
+                <el-table-column width="100" property="name" label="name" />
+                <el-table-column width="300" property="address" label="address" />
+            </el-table>
+        </template>
+    </el-skeleton>
 </template>
 
 <style scoped lang='scss'>
 .log-table {
     width: 100%;
+
+    &-body {
+        width: 100%;
+    }
+}
+
+.skeleton-table-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+
+    &-row {
+        flex: 1;
+
+        &+& {
+            margin-left: 6px;
+        }
+    }
 }
 </style>
