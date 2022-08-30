@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-18 16:00:07
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-29 16:04:28
+ * @LastEditTime: 2022-08-30 11:34:00
  * @Description:
  */
 import { defineConfig } from "vite";
@@ -63,10 +63,38 @@ export default defineConfig({
         }),
         components({
             resolvers: [ElementPlusResolver()],
+            dts: true,
         }),
     ],
     optimizeDeps: {
         include: [],
+    },
+    build: {
+        target: 'modules',
+        // minify: 'terser',
+        sourcemap: 'hidden',
+        chunkSizeWarningLimit: 500,
+        assetsInlineLimit: 4096,
+        polyfillModulePreload: true,
+        cssCodeSplit: true,
+        ssrManifest: false,
+        emptyOutDir: true,
+        manifest: false,
+        write: true,
+        // terserOptions: {
+        //     compress: {
+        //         keep_infinity: true,
+        //         drop_debugger: true,
+        //         drop_console: true,
+        //     },
+        // },
+        rollupOptions: {
+            output: {
+                chunkFileNames: `assets/js/[name]-[hash].js`,
+                entryFileNames: `assets/js/[name]-[hash].js`,
+                assetFileNames: `assets/[name]-[hash].[ext]`,
+            },
+        },
     },
     test: {
         globals: true,
