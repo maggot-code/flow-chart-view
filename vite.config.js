@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-18 16:00:07
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-30 11:34:00
+ * @LastEditTime: 2022-09-21 18:08:32
  * @Description:
  */
 import { defineConfig } from "vite";
@@ -26,7 +26,7 @@ export default defineConfig({
         },
         proxy: {
             '/api': {
-                target: 'http://10.1.1.130:30100/',
+                target: 'http://192.1.1.6:8300/',
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, '/api')
             },
@@ -67,7 +67,10 @@ export default defineConfig({
         }),
     ],
     optimizeDeps: {
-        include: [],
+        // exclude: [
+        //     "@antv/x6",
+        //     "@antv/x6-vue-shape"
+        // ]
     },
     build: {
         target: 'modules',

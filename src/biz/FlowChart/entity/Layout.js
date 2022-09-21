@@ -1,13 +1,27 @@
+/*
+ * @FilePath: \flow-chart-view\src\biz\FlowChart\entity\Layout.js
+ * @Author: maggot-code
+ * @Date: 2022-08-22 15:53:26
+ * @LastEditors: maggot-code
+ * @LastEditTime: 2022-09-21 18:04:35
+ * @Description: 
+ */
+import { createVNode } from "vue";
 import NodeSquare from "@/component/NodeSquare.vue";
 import { Graph } from "@antv/x6";
 
 Graph.registerVueComponent(
     "node-square",
+    // {
+    //     template: `<NodeSquare />`,
+    //     components: {
+    //         NodeSquare,
+    //     },
+    // },
     {
-        template: `<NodeSquare />`,
-        components: {
-            NodeSquare,
-        },
+        render: () => {
+            return createVNode(NodeSquare);
+        }
     },
     true
 );

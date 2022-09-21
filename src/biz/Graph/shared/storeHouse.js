@@ -3,10 +3,11 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 14:04:24
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-23 15:21:18
+ * @LastEditTime: 2022-09-21 18:05:44
  * @Description: 
  */
 import "@antv/x6-vue-shape";
+import { createVNode } from "vue";
 import { isNil } from "lodash";
 import { Graph } from "@antv/x6";
 
@@ -16,10 +17,15 @@ function registerVueComponent(components, handler) {
         if (isNil(component.default.__name)) return;
 
         handler(component.default);
+        // Graph.registerVueComponent(component.default.__name, {
+        //     template: `<${component.default.__name} />`,
+        //     components: {
+        //         [component.default.__name]: component.default
+        //     }
+        // }, true);
         Graph.registerVueComponent(component.default.__name, {
-            template: `<${component.default.__name} />`,
-            components: {
-                [component.default.__name]: component.default
+            render: () => {
+                return createVNode(component.default);
             }
         }, true);
     });

@@ -3,11 +3,11 @@
  * @Author: maggot-code
  * @Date: 2022-08-18 16:00:20
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-24 16:07:05
+ * @LastEditTime: 2022-09-21 18:03:57
  * @Description: 
 -->
 <script setup>
-import { onMounted, onUnmounted, unref, ref, shallowRef } from "vue";
+import { onMounted, onUnmounted, unref, ref, shallowRef, createVNode } from "vue";
 import { useTeleport } from "@antv/x6-vue-shape";
 import { Graph } from "@antv/x6";
 import NodeSquare from "@/component/NodeSquare.vue";
@@ -26,11 +26,16 @@ const TeleportContainer = useTeleport(UNIQ_GRAPH_ID);
 
 Graph.registerVueComponent(
     "node-square",
+    // {
+    //     template: `<NodeSquare />`,
+    //     components: {
+    //         NodeSquare,
+    //     },
+    // },
     {
-        template: `<NodeSquare />`,
-        components: {
-            NodeSquare,
-        },
+        render: () => {
+            return createVNode(NodeSquare);
+        }
     },
     true
 );
