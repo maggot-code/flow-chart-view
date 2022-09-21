@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 16:12:08
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-30 09:13:25
+ * @LastEditTime: 2022-09-21 18:25:25
  * @Description: 
  */
 import { unref, computed, shallowRef } from "vue";
@@ -57,7 +57,7 @@ export function useLayout() {
         nodes: computed(() => {
             if (unref(notNode)) return [];
 
-            const { id, level } = unref(nodes).at(-1);
+            const { id, level } = unref(nodes)[unref(nodes).length - 1];
             return [...unref(nodes), {
                 name: "结束",
                 pid: id,
@@ -74,7 +74,7 @@ export function useLayout() {
         edges: computed(() => {
             if (unref(notNode)) return [];
 
-            const { nodeKey } = unref(nodes).at(-1);
+            const { nodeKey } = unref(nodes)[unref(nodes).length - 1];
             return [...unref(edges), { from: nodeKey, to: ["endnode"] }]
         }),
         toTransform
