@@ -1,9 +1,9 @@
 <!--
- * @FilePath: \flow-chart-view\src\component\Graphics\Nodes\ExamineNode.vue
+ * @FilePath: \flow-chart-view\src\component\Graphics\nodes\ExamineNode.vue
  * @Author: maggot-code
  * @Date: 2022-08-23 16:00:25
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-30 11:21:09
+ * @LastEditTime: 2022-09-23 16:32:11
  * @Description: 
 -->
 <script setup >
@@ -26,7 +26,7 @@ const defaultNodeData = {
 const { name, state, info, click, mouse } = Object.assign({}, defaultNodeData, node?.data ?? {});
 const hasPopoper = computed(() => !(click || mouse));
 const hasInfo = computed(() => info.length > 0);
-const { className, toReach, toRemarks } = useState(state);
+const { className, toReach, toContent } = useState(state);
 
 const nodeRefs = ref(null);
 const defaultNodeRrefs = { clientWidth: 0 };
@@ -48,19 +48,15 @@ function toDate(rawValue) {
         dayjs(rawValue).format("YYYY-MM-DD HH:mm:ss")
     ];
 }
-const displayInfo = computed(() => {
-    const [{ name, timeout, finishTime, createTime }] = info;
-    const timeoutValue = timeout ? "已超时" : "未超时";
-    const data = [
-        { key: "name", value: name },
-        { key: "timeout", value: timeoutValue }
-    ];
-    const [createTimeShow, createTimeValue] = toDate(createTime);
+const nameAndTime = computed(() => {
+    console.log(info[0]);
+    const [{ name, finishTime }] = info;
     const [finishTimeSHow, finishTimeValue] = toDate(finishTime);
-    if (createTimeShow && state !== "finish") data.push({ key: "createTime", value: createTimeValue });
-    if (finishTimeSHow && state === "finish") data.push({ key: "finishTime", value: finishTimeValue });
 
-    return data;
+    return {
+        time: finishTimeSHow ? finishTimeValue : "",
+        name
+    }
 });
 </script>
 
@@ -72,18 +68,19 @@ const displayInfo = computed(() => {
                 <div class="node-examine-icon">
                     <img src="@/assets/icon/state/user.png" :alt="name">
                 </div>
-                <p class="node-examine-text">{{  name  }}</p>
+                <p class="node-examine-text">{{ name }}</p>
                 <div class="node-examine-info" v-if="hasInfo" :style="infoStyle">
                     <template v-if="toReach">
-                        <template v-for="(item) in displayInfo" :key="item.key">
-                            <p class="node-examine-info-cell">{{  item.value  }}</p>
-                        </template>
+                        <p class="node-examine-info-cell node-examine-info-log">
+                            <span>{{nameAndTime.name}}</span>
+                            <span>{{nameAndTime.time}}</span>
+                        </p>
 
-                        <p v-if="toRemarks" class="node-examine-info-cell node-examine-info-remarks">备注：{{
-                             info[0].remarks  }}
+                        <p v-if="toContent" class="node-examine-info-cell node-examine-info-remarks">审核意见：{{
+                        info[0].content }}
                         </p>
                     </template>
-                    <p v-else class="node-examine-info-cell">{{  info.map(item => item.name).join(", ")  }}</p>
+                    <p v-else class="node-examine-info-cell">{{ info.map(item => item.name).join(", ") }}</p>
                 </div>
             </div>
         </template>
@@ -128,7 +125,7 @@ const displayInfo = computed(() => {
     &-info {
         position: absolute;
         top: 0;
-        width: 200px;
+        width: 240px;
         background-color: #eee;
         padding: 6px;
         box-sizing: border-box;
@@ -141,6 +138,11 @@ const displayInfo = computed(() => {
             height: 24px;
             line-height: 24px;
             color: #333;
+        }
+
+        &-log {
+            display: flex;
+            justify-content: space-between;
         }
 
         &-remarks {
