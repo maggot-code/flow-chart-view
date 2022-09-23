@@ -4,6 +4,11 @@
     background-size: 48px;
     background-position: calc(100% - 12px) center;
 
+    &-start-pending {
+        background-color: #E6A23C;
+        background-image: url("@/assets/icon/state/startpending.png");
+    }
+
     &-finish {
         background-color: #67C23A;
         background-image: url("@/assets/icon/state/finish.png");
