@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 16:00:25
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-09-23 16:32:11
+ * @LastEditTime: 2022-09-26 10:12:05
  * @Description: 
 -->
 <script setup >
@@ -49,7 +49,6 @@ function toDate(rawValue) {
     ];
 }
 const nameAndTime = computed(() => {
-    console.log(info[0]);
     const [{ name, finishTime }] = info;
     const [finishTimeSHow, finishTimeValue] = toDate(finishTime);
 
