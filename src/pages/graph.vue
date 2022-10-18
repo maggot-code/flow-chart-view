@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-24 13:47:30
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-30 11:24:03
+ * @LastEditTime: 2022-10-18 13:41:45
  * @Description: http://10.1.1.96:30100/api/example/system/flowchar/getBpmChartTree?prociontid=653649459409846272
 -->
 <script setup>
@@ -18,10 +18,13 @@ import { useLayout } from "@/composable/Graphics/useLayout";
 
 const SERVICE_URL = "/api/example/system/flowchar/getBpmChartTree";
 const route = useRoute();
-const url = computed(() => {
+const params = computed(() => {
     const { prociontid } = unref(route.params);
-    const params = Object.assign({}, route.query, { prociontid });
-    const data = Reflect.ownKeys(params).map((key) => `${key}=${params[key]}`).join("&");
+    const query = Object.assign({}, { zoom: 1 }, route.query);
+    return Object.assign({}, query, { prociontid });
+});
+const url = computed(() => {
+    const data = Reflect.ownKeys(unref(params)).map((key) => `${key}=${unref(params)[key]}`).join("&");
 
     return `${SERVICE_URL}?${data}`;
 });
@@ -97,8 +100,6 @@ function handlerNodeClick(target) {
 }
 function handlerNodeMouse(target) {
     const { enter, leave } = target;
-    console.log("进入", enter);
-    console.log("离开", leave);
 }
 
 watchEffect(() => {
@@ -129,7 +130,7 @@ onBeforeUnmount(() => {
 
 <template>
     <div class="graph" v-loading="!visabled" element-loading-background="rgba(3, 3, 3, 0.3)">
-        <graph-container v-if="visabled" @onReady="handlerGraph" @onNodeClick="handlerNodeClick"
+        <graph-container v-if="visabled" :params="params" @onReady="handlerGraph" @onNodeClick="handlerNodeClick"
             @onNodeMouse="handlerNodeMouse">
         </graph-container>
     </div>

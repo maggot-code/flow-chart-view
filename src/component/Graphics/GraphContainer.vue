@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 15:44:25
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-29 17:38:17
+ * @LastEditTime: 2022-10-18 13:51:29
  * @Description: 
 -->
 <script setup>
@@ -23,6 +23,10 @@ const props = defineProps({
     info: {
         type: Object,
         default: () => ({})
+    },
+    params: {
+        type: Object,
+        default: () => ({ zoom: 1 })
     }
 });
 provide("graphInfo", props.info);
@@ -55,6 +59,7 @@ function nodeLeave(event) {
 }
 onMounted(() => {
     const { clientWidth: width, clientHeight: height } = unref(graphRefs);
+    const zoom = props.params.zoom >= 2 ? 2 : props.params.zoom <= 0.5 ? 0.5 : props.params.zoom;
     graph.value = new Graph({
         width,
         height,
@@ -73,6 +78,7 @@ onMounted(() => {
     unref(graph).on("node:click", nodeClick);
     unref(graph).on("node:mouseenter", nodeEnter);
     unref(graph).on("node:mouseleave", nodeLeave);
+    unref(graph).zoom(zoom, { absolute: true });
     emits("onReady", {
         refs: unref(graphRefs),
         graph: unref(graph),

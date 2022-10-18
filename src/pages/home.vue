@@ -3,22 +3,39 @@
  * @Author: maggot-code
  * @Date: 2022-08-23 09:14:43
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-29 17:41:21
+ * @LastEditTime: 2022-10-18 13:50:42
  * @Description: 
 -->
 <script setup>
-// import TestJson from "@/assets/json/v1.test.json";
 import TestJson from "@/assets/json/v3.test.json";
-import insertCss from 'insert-css';
 import GraphContainer from '@/component/Graphics/GraphContainer.vue';
+import { onMounted, onBeforeUnmount, watchEffect, unref, computed } from "vue";
+import { ElMessage } from 'element-plus';
+import { isNil, findIndex } from "lodash";
+import insertCss from 'insert-css';
+import { useRoute } from "vue-router";
+import { useFetch } from "@vueuse/core";
 import { useLayout } from "@/composable/Graphics/useLayout";
-import { findIndex, isNil } from "lodash";
-import { onMounted, unref, ref, computed } from "vue";
+
+const SERVICE_URL = "/api/example/system/flowchar/getBpmChartTree";
+const route = useRoute();
+const params = computed(() => {
+    const { prociontid } = unref(route.params);
+    const query = Object.assign({}, { zoom: 1 }, route.query);
+    return Object.assign({}, query, { prociontid });
+});
+const url = computed(() => {
+    const data = Reflect.ownKeys(unref(params)).map((key) => `${key}=${unref(params)[key]}`).join("&");
+
+    return `${SERVICE_URL}?${data}`;
+});
+const { isFinished, error, data } = useFetch(url);
 
 const { nodes, edges, toTransform } = useLayout();
-const loading = ref(true);
-const visabled = computed(() => !unref(loading));
-const graphInfo = { projid: 111 };
+const isError = computed(() => isNil(unref(error)));
+const visabled = computed(() => {
+    return unref(isError) && unref(isFinished);
+});
 
 function handlerGraph({ refs, graph, view }) {
     const { clientWidth, clientHeight } = refs;
@@ -84,11 +101,22 @@ function handlerNodeClick(target) {
 }
 function handlerNodeMouse(target) {
     const { enter, leave } = target;
-    console.log("进入", enter);
-    console.log("离开", leave);
 }
 
+watchEffect(() => {
+    if (!unref(isFinished)) return;
+    if (!unref(isError)) {
+        console.log(unref(error));
+        ElMessage.error({ center: true, showClose: true, duration: 0, message: "请求失败 | 数据未找到" });
+        return;
+    }
+    // const raw = JSON.parse(unref(data));
+    // toTransform(raw);
+});
+
 onMounted(() => {
+    console.log(unref(params));
+    ElMessage.closeAll();
     insertCss(`
         @keyframes ant-line {
             to {
@@ -97,13 +125,15 @@ onMounted(() => {
         }
     `);
     toTransform(TestJson);
-    loading.value = false;
+});
+onBeforeUnmount(() => {
+    ElMessage.closeAll();
 });
 </script>
 
 <template>
-    <div class="home">
-        <graph-container v-if="visabled" :info="graphInfo" @onReady="handlerGraph" @onNodeClick="handlerNodeClick"
+    <div class="home" v-loading="!visabled" element-loading-background="rgba(3, 3, 3, 0.3)">
+        <graph-container v-if="visabled" :params="params" @onReady="handlerGraph" @onNodeClick="handlerNodeClick"
             @onNodeMouse="handlerNodeMouse">
         </graph-container>
     </div>
