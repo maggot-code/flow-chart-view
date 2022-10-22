@@ -1,9 +1,9 @@
 <!--
- * @FilePath: \flow-chart-view\src\component\LogTable.vue
+ * @FilePath: /flow-chart-view/src/component/LogTable.vue
  * @Author: maggot-code
  * @Date: 2022-08-29 17:10:33
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-08-30 11:26:46
+ * @LastEditTime: 2022-10-22 23:35:14
  * @Description: 
 -->
 <script setup>
@@ -14,7 +14,7 @@ import dayjs from "dayjs";
 import { useRoute } from "vue-router";
 import { useFetch } from "@vueuse/core";
 
-const SERVICE_URL = "/api/example/system/flowchar/getBpmChartNodeLog";
+const SERVICE_URL = "/kjmis_zmny_war_exploded/flowchar/getBpmChartNodeLog";
 const getNode = inject("getNode");
 const node = getNode();
 const route = useRoute();
@@ -74,7 +74,7 @@ onBeforeUnmount(() => {
                 :border="true" :stripe="true" :data="JSON.parse(unref(data))">
                 <el-table-column property="createTime" label="完成时间" width="140" align="center">
                     <template #default="scope">
-                        <p>{{  toDate(scope, "createTime")  }}</p>
+                        <p>{{ toDate(scope, "createTime") }}</p>
                     </template>
                 </el-table-column>
                 <el-table-column property="operationTypeName" label="动作" width="80" />

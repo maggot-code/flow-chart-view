@@ -1,9 +1,9 @@
 <!--
- * @FilePath: \flow-chart-view\src\pages\graph.vue
+ * @FilePath: /flow-chart-view/src/pages/graph.vue
  * @Author: maggot-code
  * @Date: 2022-08-24 13:47:30
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-10-18 13:41:45
+ * @LastEditTime: 2022-10-22 23:42:34
  * @Description: http://10.1.1.96:30100/api/example/system/flowchar/getBpmChartTree?prociontid=653649459409846272
 -->
 <script setup>
@@ -16,7 +16,7 @@ import { useRoute } from "vue-router";
 import { useFetch } from "@vueuse/core";
 import { useLayout } from "@/composable/Graphics/useLayout";
 
-const SERVICE_URL = "/api/example/system/flowchar/getBpmChartTree";
+const SERVICE_URL = "/kjmis_zmny_war_exploded/flowchar/getBpmChartTree";
 const route = useRoute();
 const params = computed(() => {
     const { prociontid } = unref(route.params);
@@ -109,8 +109,13 @@ watchEffect(() => {
         ElMessage.error({ center: true, showClose: true, duration: 0, message: "请求失败 | 数据未找到" });
         return;
     }
-    const raw = JSON.parse(unref(data));
-    toTransform(raw);
+
+    try {
+        const raw = JSON.parse(unref(data));
+        toTransform(raw);
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 onMounted(() => {
