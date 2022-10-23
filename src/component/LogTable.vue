@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-29 17:10:33
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-10-22 23:35:14
+ * @LastEditTime: 2022-10-23 13:08:06
  * @Description: 
 -->
 <script setup>
@@ -14,7 +14,7 @@ import dayjs from "dayjs";
 import { useRoute } from "vue-router";
 import { useFetch } from "@vueuse/core";
 
-const SERVICE_URL = "/kjmis_zmny_war_exploded/flowchar/getBpmChartNodeLog";
+const SERVICE_URL = "/kjmis_zmny/flowchar/getBpmChartNodeLog.do";
 const getNode = inject("getNode");
 const node = getNode();
 const route = useRoute();

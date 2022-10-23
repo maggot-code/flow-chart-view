@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-24 13:47:30
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-10-22 23:42:34
+ * @LastEditTime: 2022-10-23 13:08:07
  * @Description: http://10.1.1.96:30100/api/example/system/flowchar/getBpmChartTree?prociontid=653649459409846272
 -->
 <script setup>
@@ -16,7 +16,7 @@ import { useRoute } from "vue-router";
 import { useFetch } from "@vueuse/core";
 import { useLayout } from "@/composable/Graphics/useLayout";
 
-const SERVICE_URL = "/kjmis_zmny_war_exploded/flowchar/getBpmChartTree";
+const SERVICE_URL = "/kjmis_zmny/flowchar/getBpmChartTree.do";
 const route = useRoute();
 const params = computed(() => {
     const { prociontid } = unref(route.params);
