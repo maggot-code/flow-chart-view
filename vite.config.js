@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-18 16:00:07
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-09-21 18:08:32
+ * @LastEditTime: 2022-10-24 17:35:30
  * @Description:
  */
 import { defineConfig } from "vite";
@@ -14,6 +14,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: "/flowview/",
     clearScreen: true,
     css: {
         scss: {
