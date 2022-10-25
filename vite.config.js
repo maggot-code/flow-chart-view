@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-08-18 16:00:07
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-10-24 17:35:30
+ * @LastEditTime: 2022-10-25 10:51:30
  * @Description:
  */
 import { defineConfig } from "vite";
@@ -58,12 +58,12 @@ export default defineConfig({
     plugins: [
         vue(),
         autopImport({
-            resolvers: [ElementPlusResolver()],
+            resolvers: [ElementPlusResolver({ importStyle: "css" })],
             imports: ['vue', 'vitest'],
             dts: true,
         }),
         components({
-            resolvers: [ElementPlusResolver()],
+            resolvers: [ElementPlusResolver({ importStyle: "css" })],
             dts: true,
         }),
     ],
