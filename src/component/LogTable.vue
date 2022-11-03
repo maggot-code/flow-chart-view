@@ -1,9 +1,9 @@
 <!--
- * @FilePath: /flow-chart-view/src/component/LogTable.vue
+ * @FilePath: \flow-chart-view\src\component\LogTable.vue
  * @Author: maggot-code
  * @Date: 2022-08-29 17:10:33
  * @LastEditors: maggot-code
- * @LastEditTime: 2022-10-23 13:08:06
+ * @LastEditTime: 2022-11-03 18:16:24
  * @Description: 
 -->
 <script setup>
@@ -14,7 +14,7 @@ import dayjs from "dayjs";
 import { useRoute } from "vue-router";
 import { useFetch } from "@vueuse/core";
 
-const SERVICE_URL = "/kjmis_zmny/flowchar/getBpmChartNodeLog.do";
+const SERVICE_URL = "/kjmis_zmny_war_exploded/flowchar/getBpmChartNodeLog.do";
 const getNode = inject("getNode");
 const node = getNode();
 const route = useRoute();
